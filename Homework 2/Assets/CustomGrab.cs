@@ -27,6 +27,40 @@ public class CustomGrab : MonoBehaviour
                 otherHand = c;
         }
     }
+    /*
+    void Update()
+    {
+        grabbing = action.action.IsPressed();
+        if (grabbing)
+        {
+            // Grab nearby object or the object in the other hand
+            if (!grabbedObject)
+                grabbedObject = nearObjects.Count > 0 ? nearObjects[0] : otherHand.grabbedObject;
+
+            if (grabbedObject)
+            {
+                // Change these to add the delta position and rotation instead
+                // Save the position and rotation at the end of Update function, so you can compare previous pos/rot to current here
+                grabbedObject.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+
+                Vector3 deltaPosition  =  transform.position - previousPosition;
+                Quaternion deltaRotation = transform.rotation * Quaternion.Inverse(previousRotation);
+                
+                grabbedObject.position += deltaPosition;
+                grabbedObject.rotation = deltaRotation * grabbedObject.rotation;
+            }
+        }
+        // If let go of button, release object
+        else if (grabbedObject)
+            grabbedObject.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            grabbedObject = null;
+
+        // Should save the current position and rotation here
+        previousPosition = transform.position;
+        previousRotation = transform.rotation;
+
+    }
+    */
 
     void Update()
     {
@@ -41,27 +75,24 @@ public class CustomGrab : MonoBehaviour
             {
                 // Change these to add the delta position and rotation instead
                 // Save the position and rotation at the end of Update function, so you can compare previous pos/rot to current here
-                Vector3 deltaPosition  =  transform.position - previousPosition;
+
+                Vector3 deltaPosition = transform.position - previousPosition;
                 Quaternion deltaRotation = transform.rotation * Quaternion.Inverse(previousRotation);
-                
+
                 grabbedObject.position += deltaPosition;
                 grabbedObject.rotation = deltaRotation * grabbedObject.rotation;
-
-                //Vector3 distanceVector = grabbedObject.position - transform.position;
-                //Vector3 rotationVector = (deltaRotation * distanceVector) - distanceVector;
-
-                //grabbedObject.position = grabbedObject.position + deltaPosition + rotationVector;
-                //grabbedObject.rotation = deltaRotation * grabbedObject.rotation;
+                grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
             }
         }
         // If let go of button, release object
         else if (grabbedObject)
-            grabbedObject = null;
+            grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
+            if (!grabbedObject.GetComponent<Rigidbody>().isKinematic)
+                grabbedObject = null;
 
         // Should save the current position and rotation here
         previousPosition = transform.position;
         previousRotation = transform.rotation;
-
     }
 
     private void OnTriggerEnter(Collider other)
