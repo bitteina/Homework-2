@@ -269,6 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95ee78776b969d84d8205d152486b6f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  viewTarget: {fileID: 73346848}
   mainCamera: {fileID: 1608987168}
   mag: {fileID: 429406767}
 --- !u!1 &73346844
@@ -318,7 +319,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 73346844}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
