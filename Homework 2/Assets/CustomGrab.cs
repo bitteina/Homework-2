@@ -86,9 +86,10 @@ public class CustomGrab : MonoBehaviour
         }
         // If let go of button, release object
         else if (grabbedObject)
-            grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
-            if (!grabbedObject.GetComponent<Rigidbody>().isKinematic)
-                grabbedObject = null;
+            //grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
+            //if (!grabbedObject.GetComponent<Rigidbody>().isKinematic)
+            //    grabbedObject = null;
+            grabbedObject = null;
 
         // Should save the current position and rotation here
         previousPosition = transform.position;
