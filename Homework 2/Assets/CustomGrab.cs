@@ -13,6 +13,8 @@ public class CustomGrab : MonoBehaviour
     public InputActionReference action;
     bool grabbing = false;
 
+    public InputActionReference doubleSpeed;
+
     private Vector3 previousPosition;
     private Quaternion previousRotation;
 
@@ -78,6 +80,11 @@ public class CustomGrab : MonoBehaviour
 
                 Vector3 deltaPosition = transform.position - previousPosition;
                 Quaternion deltaRotation = transform.rotation * Quaternion.Inverse(previousRotation);
+
+                if(doubleSpeed.action.IsPressed())
+                {
+                    deltaRotation = deltaRotation * deltaRotation;
+                }
 
                 grabbedObject.position += deltaPosition;
                 grabbedObject.rotation = deltaRotation * grabbedObject.rotation;
