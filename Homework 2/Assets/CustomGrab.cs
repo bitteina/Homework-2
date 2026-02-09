@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,7 +14,9 @@ public class CustomGrab : MonoBehaviour
     public InputActionReference action;
     bool grabbing = false;
 
-    public InputActionReference doubleSpeed;
+    public InputActionReference doubleRotation;
+    public TextMeshPro text;
+    public bool doubleOn = false;
 
     private Vector3 previousPosition;
     private Quaternion previousRotation;
@@ -21,6 +24,7 @@ public class CustomGrab : MonoBehaviour
     private void Start()
     {
         action.action.Enable();
+        doubleRotation.action.Enable();
 
         // Find the other hand
         foreach (CustomGrab c in transform.parent.GetComponentsInChildren<CustomGrab>())
@@ -29,44 +33,12 @@ public class CustomGrab : MonoBehaviour
                 otherHand = c;
         }
     }
-    /*
-    void Update()
-    {
-        grabbing = action.action.IsPressed();
-        if (grabbing)
-        {
-            // Grab nearby object or the object in the other hand
-            if (!grabbedObject)
-                grabbedObject = nearObjects.Count > 0 ? nearObjects[0] : otherHand.grabbedObject;
 
-            if (grabbedObject)
-            {
-                // Change these to add the delta position and rotation instead
-                // Save the position and rotation at the end of Update function, so you can compare previous pos/rot to current here
-                grabbedObject.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-
-                Vector3 deltaPosition  =  transform.position - previousPosition;
-                Quaternion deltaRotation = transform.rotation * Quaternion.Inverse(previousRotation);
-                
-                grabbedObject.position += deltaPosition;
-                grabbedObject.rotation = deltaRotation * grabbedObject.rotation;
-            }
-        }
-        // If let go of button, release object
-        else if (grabbedObject)
-            grabbedObject.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-            grabbedObject = null;
-
-        // Should save the current position and rotation here
-        previousPosition = transform.position;
-        previousRotation = transform.rotation;
-
-    }
-    */
 
     void Update()
     {
         grabbing = action.action.IsPressed();
+        doubleOn = doubleRotation.action.IsPressed();
         if (grabbing)
         {
             // Grab nearby object or the object in the other hand
@@ -80,10 +52,10 @@ public class CustomGrab : MonoBehaviour
 
                 Vector3 deltaPosition = transform.position - previousPosition;
                 Quaternion deltaRotation = transform.rotation * Quaternion.Inverse(previousRotation);
-
-                if(doubleSpeed.action.IsPressed())
+                
+                if (doubleOn)
                 {
-                    deltaRotation = deltaRotation * deltaRotation;
+                    grabbedObject.rotation = deltaRotation * grabbedObject.rotation;
                 }
 
                 grabbedObject.position += deltaPosition;

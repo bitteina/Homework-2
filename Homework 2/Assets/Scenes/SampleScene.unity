@@ -959,7 +959,9 @@ MonoBehaviour:
   nearObjects: []
   grabbedObject: {fileID: 0}
   action: {fileID: -5194266436686895582, guid: e0ca4504471ca124088e1e2cfe6804ae, type: 3}
-  doubleSpeed: {fileID: -5684558904543120851, guid: e0ca4504471ca124088e1e2cfe6804ae, type: 3}
+  doubleRotation: {fileID: -5684558904543120851, guid: e0ca4504471ca124088e1e2cfe6804ae, type: 3}
+  text: {fileID: 0}
+  doubleOn: 0
 --- !u!1 &395844885
 GameObject:
   m_ObjectHideFlags: 0
@@ -2609,7 +2611,9 @@ MonoBehaviour:
   nearObjects: []
   grabbedObject: {fileID: 0}
   action: {fileID: -1289947363739713011, guid: e0ca4504471ca124088e1e2cfe6804ae, type: 3}
-  doubleSpeed: {fileID: 2526168894431210536, guid: e0ca4504471ca124088e1e2cfe6804ae, type: 3}
+  doubleRotation: {fileID: 2526168894431210536, guid: e0ca4504471ca124088e1e2cfe6804ae, type: 3}
+  text: {fileID: 0}
+  doubleOn: 0
 --- !u!1 &1660256093
 GameObject:
   m_ObjectHideFlags: 0
