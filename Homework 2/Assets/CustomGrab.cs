@@ -53,12 +53,14 @@ public class CustomGrab : MonoBehaviour
                 Vector3 deltaPosition = transform.position - previousPosition;
                 Quaternion deltaRotation = transform.rotation * Quaternion.Inverse(previousRotation);
                 
+                Vector3 distanceVector = grabbedObject.position - transform.position;
+                Vector3 rotatedVector = deltaRotation * distanceVector - distanceVector;
+
                 if (doubleOn)
                 {
                     grabbedObject.rotation = deltaRotation * grabbedObject.rotation;
                 }
-
-                grabbedObject.position += deltaPosition;
+                grabbedObject.position += deltaPosition + rotatedVector;
                 grabbedObject.rotation = deltaRotation * grabbedObject.rotation;
                 grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
             }
